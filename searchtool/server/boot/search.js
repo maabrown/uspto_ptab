@@ -28,7 +28,7 @@ exports.buildSearch = function (req, res) {
         var fromDate = +new Date(req.query.fromdate)/1000;
         var toDate   = +new Date(req.query.todate)/1000;
         dateRange = 'doc_date:['+ fromDate+'%20TO%20'+toDate+']';
-
+    }
 
     // Ensure q var is cast to string
     var q, fq;
@@ -75,7 +75,7 @@ exports.buildSearch = function (req, res) {
                     email: req.body.email,
                     accessOK: !!(! config.requireLogin || token.id),
                     todate: req.query.todate,
-                    fromdate:req.query.fromdate
+                    fromdate:req.query.fromdate,
                 });
             } else {
                 res.render('newview', {
