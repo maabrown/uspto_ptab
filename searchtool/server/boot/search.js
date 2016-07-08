@@ -28,7 +28,6 @@ exports.buildSearch = function (req, res) {
     if ((typeof req.query.fromdate !== 'undefined' && req.query.todate !== 'undefined') &&  (req.query.fromdate.length > 2 && req.query.todate.length > 2)) {
         var fromdate =  moment(req.query.fromdate).format('YYYY-MM-DD');
         var todate   =  moment(req.query.todate).format('YYYY-MM-DD');
-
         todate = todate + 'T00:00:00Z';
         fromdate = fromdate + 'T00:00:00Z';
 
