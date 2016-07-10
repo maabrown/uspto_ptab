@@ -36,6 +36,7 @@ exports.buildSearch = function (req, res) {
         q=req.query.q.toString();
     }
 
+
     // Set Pagination to incremnt by 20 results
     var s = 0;
     var currentPage = 1;
@@ -43,8 +44,19 @@ exports.buildSearch = function (req, res) {
         s = (req.query.pageno -1) *20;
         currentPage = parseInt(req.query.pageno) ;
     }
+    
     fq = "&fq=type:" + req.query.dataset;
     fq += "&fq=" + dateRange;
+    // fq += "&fq=" + documentcode;
+
+    // var documentcode='';
+    console.log(typeof req.query.fromdate);
+    // if ((req.query.documentcode.length > 2) &&  (typeof req.query.documentcode !== 'undefined')) {
+    //     documentcode = 'documentcode:'+req.query.document;
+    // }
+
+
+
     // Build Search .. if no page number set then only show
     var SEARCH_URL = config.solrURI+'/select?q={!q.op=AND df=textdata}'+q+fq+'&wt=json&indent=true&rows=20&start='+s+'&hl=true&hl.snippets=10&hl.fl=textdata&hl.fragsize=200&hl.simple.pre=<code>&hl.simple.post=</code>&hl.usePhraseHighlighter=true&q.op=AND';
     if (req.query.dataset == 'oa'){
@@ -76,6 +88,7 @@ exports.buildSearch = function (req, res) {
                     accessOK: !!(! config.requireLogin || token.id),
                     todate: req.query.todate,
                     fromdate:req.query.fromdate,
+                    documentcode: req.query.documentcode
                 });
             } else {
                 res.render('newview', {
