@@ -28,6 +28,10 @@ hbs.registerHelper('breaklines', function(text) {
 // must be set to serve views properly when starting the app via `slc run` from
 // the project rootapp.set('views', path.join(__dirname, 'views'));
 
+hbs.registerHelper('selectmenu', function(context, options) {
+  console.log(typeof documentcode);
+});
+
 app.set('views', path.join(__dirname, 'views'));
 app.use('/client', loopback.static(path.join(__dirname, '../client')));
 app.use('/bower_components', loopback.static(path.join(__dirname, '../bower_components')));

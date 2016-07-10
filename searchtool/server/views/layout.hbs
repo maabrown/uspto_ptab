@@ -187,7 +187,7 @@
                   </div>
                 </div>
 
-                <select name="documentcode">
+                <select name="documentcode" id=documentcodeID>
                   <option value="">Please choose a document code</option>
                   <option value="RXCTIN">INTERFERENCE COMMUNICATION: INITIAL MEMO:RXCTIN</option>
                   <option value="RDIN">RX - DECISION STAYING REEXAM IN FAVOR OF INTERFERENCE:RDIN</option>
@@ -408,6 +408,14 @@
                         <div class="row">
                             {{#if term}}<span> Search Term: <span class="label label-success subtle">{{term}}</span> </span>{{/if}}
                             {{#if total}}
+
+                            {{#if documentcode}}
+
+                            <span> Document Code: </span><span class="label label-success subtle">{{documentcode}}</span>
+                            
+                            {{/if}}
+                            
+                            <br>
                             <span class="pull-left margin-top-0">{{total}} results took {{took}} ms</span>
                             <span><a href="javascript:void(0);" onclick="resizeText(1)" id="plustext"> [+] Make results bigger</a> | <a href="javascript:void(0);" onclick="resizeText(-1)" id="minustext">[-] Make results smaller</a></span>
                             {{/if}}

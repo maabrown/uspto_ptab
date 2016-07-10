@@ -37,6 +37,7 @@
 
           {{#each result}}
             <div class="media">
+              
               <h4>  <a style="cursor:pointer"; onClick="javascript:document.getElementById('action_text').innerHTML =''; document.getElementById('action_text').innerHTML ='<h5>File Doc ID:{{filename}} , Action Type: {{action_type.[0]}}</h5><hr><b>Full Text</b><hr>{{breaklines textdata.[0]}}';"  data-item="{{filename}}" data-toggle="modal" data-target="#cancelModal">  Office Action ID: {{filename}}</a> | {{action_type.[0]}}</h4>
               {{#with (lookup ../highlighting id) }}
                 {{#if textdata}}

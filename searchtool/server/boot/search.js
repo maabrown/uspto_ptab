@@ -21,6 +21,8 @@ exports.buildSearch = function (req, res) {
        lastUpdated: null,
        id: 1 } }
        */
+    
+    fq = "&fq=type:" + req.query.dataset;
     // Get From Date
     var dateRange='';
     // Only doing this for readiblity. Do not accept blank or undefined dates
@@ -28,6 +30,7 @@ exports.buildSearch = function (req, res) {
         var fromDate = +new Date(req.query.fromdate)/1000;
         var toDate   = +new Date(req.query.todate)/1000;
         dateRange = 'doc_date:['+ fromDate+'%20TO%20'+toDate+']';
+        fq += "&fq=" + dateRange;
     }
 
     // Ensure q var is cast to string
@@ -35,7 +38,6 @@ exports.buildSearch = function (req, res) {
     if (req.query.q) {
         q=req.query.q.toString();
     }
-
 
     // Set Pagination to incremnt by 20 results
     var s = 0;
@@ -45,16 +47,11 @@ exports.buildSearch = function (req, res) {
         currentPage = parseInt(req.query.pageno) ;
     }
     
-    fq = "&fq=type:" + req.query.dataset;
-    fq += "&fq=" + dateRange;
-    // fq += "&fq=" + documentcode;
-
-    // var documentcode='';
-    console.log(typeof req.query.fromdate);
-    // if ((req.query.documentcode.length > 2) &&  (typeof req.query.documentcode !== 'undefined')) {
-    //     documentcode = 'documentcode:'+req.query.document;
-    // }
-
+    // Set documentcode filter
+    if ((typeof req.query.documentcode !== 'undefined') && (req.query.documentcode.length > 0)) {
+            documentcode = 'documentcode:' + req.query.documentcode;
+            fq += "&fq=" + documentcode;
+    }
 
 
     // Build Search .. if no page number set then only show
